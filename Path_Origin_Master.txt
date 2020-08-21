@@ -1,1 +1,0 @@
-cd Desktop/"GAP - Program"/"2. Data Science"/

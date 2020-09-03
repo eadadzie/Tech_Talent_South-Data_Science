@@ -91,6 +91,12 @@
 
 	$ git push origin master
 
+9. A quick way to update your Github repo with all changes made in the remote/local. This will
+   will replace all the files in the repo with all files in the local, to avoid individual file update.
+
+	$ git add .
+	$ git commit -m "Update all changes"
+	$ git push origin master
 
 
 ############# TROUBLE SHOOTING FOR ADDING FILES AFTER CHANGING URL ###############

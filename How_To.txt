@@ -119,5 +119,12 @@
 
 	$ ps
 
+3. Show detailed history in a GUI of the commits in the GitHub
+
+	$ gitk --all
+
+4. Delete all commit of the brach
+
+	$ git clean -df
 
 	

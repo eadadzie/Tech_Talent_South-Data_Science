@@ -1,0 +1,281 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+#################################
+
+
+
+### Link to the R notes (hold Shift and click on link)
+
+"
+https://github.com/TTSMarissa/techtalentsouth/blob/43c0310cb7c82b93b9b6bf01c7d69a069ec0ea73/datascience/r/13_mod_r_intro/00.ipynb
+"
+
+print("Helo World!")
+
+# Multiple line comment
+
+### ######### Data Types
+
+v <- TRUE 
+print(class(v))
+
+v <- 23.5
+print(class(v))
+
+v <- 2L
+print(class(v))
+
+v <- 2+5i
+print(class(v))
+
+v <- "TRUE"
+print(class(v))
+
+v <- charToRaw("Hello")
+print(class(v))
+
+
+### Vectors
+
+# Create a vector.
+apple <- c('red','green',"yellow")
+print(apple)
+
+# Get the class of the vector.
+print(class(apple))
+
+
+### List
+
+# Create a list.
+list1 <- list(c(2,5,3),21.3,sin)
+
+# Print the list.
+print(list1)
+
+
+### Matrix
+
+# Create a matrix.
+M = matrix( c('a','a','b','c','b','a'), nrow = 2, ncol = 3, byrow = TRUE)
+print(M)
+
+
+### Array
+
+# Create an array.
+a <- array(c('green','yellow'),dim = c(3,3,2))
+print(a)
+
+
+### Factors
+
+# Create a vector.
+apple_colors <- c('green','green','yellow','red','red','red','green')
+
+# Create a factor object.
+factor_apple <- factor(apple_colors)
+
+# Print the factor.
+print(factor_apple)
+print(nlevels(factor_apple))
+
+
+### DataFrames
+
+# Create the data frame.
+BMI <- 	data.frame(
+   gender = c("Male", "Male","Female"), 
+   height = c(152, 171.5, 165), 
+   weight = c(81,93, 78),
+   Age = c(42,38,26)
+)
+print(BMI)
+
+
+
+### ######### Variables
+
+
+
+
+
+### ######### Operators
+
+
+
+
+
+### ######### Variables
+
+
+
+
+
+### ######### Functions
+
+## Built-in function
+
+# Create a sequence of numbers from 32 to 44.
+
+print(seq(32,44))
+
+# Find mean of numbers from 25 to 82.
+
+print(mean(25:82))
+
+# Find sum of numbers frm 41 to 68.
+
+print(sum(41:68))
+
+
+## User-defined function
+
+# Create a function to print squares of numbers in sequence.
+new.function <- function(a) {
+   for(i in 1:a) {
+      b <- i^2
+      print(b)
+   }
+}
+
+# Call the function new.function supplying 6 as an argument.
+new.function(6)
+
+
+## Function without argument 
+
+# Create a function without an argument.
+new.function <- function() {
+   for(i in 1:5) {
+      print(i^2)
+   }
+}	
+
+# Call the function without supplying an argument.
+
+new.function()
+
+
+## Functions with argument values
+
+# Create a function with arguments.
+
+new.function <- function(a,b,c) {
+   result <- a * b + c
+   print(result)
+
+}
+
+# Call the function by position of arguments.
+new.function(5,3,11)
+
+# Call the function by names of the arguments.
+new.function(a = 11, b = 5, c = 3)
+
+
+help()
+
+
+### Assessment 7
+
+# Q12
+x <- 1:4
+y <- 6:9
+z <- x + y
+z
+
+# Q13
+x <- 1:4
+x > 2
+
+# Q2
+installed.packages()
+
+"
+https://anaconda.org/r/r-tidyverse
+https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf
+
+"
+### ############## Installing Packages
+
+# install.packages("rmarkdown")
+# install.packages("tidyverse")
+
+vignette("tibble")
+
+browseVignettes()
+
+### ##################### Using Tibbles
+library(tidyverse)
+
+data(diamonds)
+diamonds
+
+summary(diamonds)
+
+
+## Ploting the data
+library(ggplot2)
+
+ggplot(data=diamonds) + geom_histogram(binwidth=500, aes(x=price)) + ggtitle("Diamond Price Distribution") + xlab("Diamond Price U$") + ylab("Frequency") + theme_minimal()
+
+
+ggplot(diamonds, aes(x=carat,y=price)) + geom_point()
+
+# ggsave
+
+## Adding color
+ggplot(diamonds, aes(x=carat,y=price, color=clarity)) + geom_point()
+
+## Adding shape
+ggplot(diamonds, aes(x=carat,y=price, color=clarity, shape=cut)) + geom_point()
+
+## Separating by subplot
+ggplot(diamonds, aes(x=carat,y=price, color=clarity, shape=cut)) + geom_point() + facet_wrap(~ cut)
+
+## Row
+ggplot(diamonds, aes(x=carat,y=price, color=clarity, shape=cut)) + geom_point() + facet_wrap(~ cut, nrow=5)
+
+## Smooth
+ggplot(diamonds, aes(x=carat,y=price)) + geom_point() + geom_smooth()
+ggplot(diamonds, aes(x=carat,y=price, color=clarity)) + geom_point() + geom_smooth()
+
+## Trend lines
+ggplot(diamonds, aes(x=carat,y=price, color=clarity)) + geom_point() + geom_smooth(method="lm")
+help(geom_smooth, ggplot2)
+
+
+## Box Plot
+
+
+
+
+
+### Date time
+
+library(dplyr)
+library(nycflights13)
+library(knitr)
+
+
+
+
+

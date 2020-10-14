@@ -1,0 +1,92 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+
+
+### ####### Q1
+
+sex <- rep(c("M", "F"), 6)
+
+stage <- rep(c("I", "II", "II"), 4)
+
+<!-- treatment <- c(rep('A', 4) , rep('B', 4), rep('P', 4)) -->
+treatment <- rep(c("A","B", "P"), each= 4)
+
+myc <- c(2343, 457, 4593, 9035, 3450, 3524, 958, 1053, 8674, 3424, 463, 5105)
+
+<!-- r_names <- c("sample1", "sample2", "sample3", "sample4", "sample5", "sample6", "sample7", "sample8","sample9","sample10", "sample11", "sample12") -->
+
+# Creat Data frame
+meta <- data.frame(sex, stage, treatment, myc)
+
+<!-- rownames(meta) <- r_names -->
+
+row.names(meta) <- paste("sample", row.names(meta), sep="")
+
+meta
+
+
+
+### ####### Q2
+
+# (i)
+df_1 <- meta[c("sex", "treatment")]
+df_1
+
+# (ii)
+df_2 <- meta[c(5,7,9,10), "treatment"]
+df_2
+
+# (iii)
+library(dplyr)
+
+meta2 <- meta
+meta2["r_name"] <- rownames(meta)
+
+df_3 <- filter(meta2, meta$treatment == "P")
+df_3
+
+# (iv)
+library(dplyr)
+
+df_4 <- filter(meta2[c("r_name","stage", "treatment")], meta$myc > 5000)
+df_4
+
+# (v)
+df_5 <- within(meta, rm(treatment))
+df_5
+
+# (vi)
+df_6 <- meta[c(7,8,9), ]
+df_6
+
+# (vii)
+df_7 <- meta[1:6, ]
+df_7
+
+# (viii)
+pre_treatment <- c("T","F","F","F","T","T","F","T","F","F","T","T")
+df_8 <- cbind(pre_treatment, meta)
+df_8
+
+# (ix)
+colnames(meta) <- c("A", "B", "C", "D")
+
+meta
+
